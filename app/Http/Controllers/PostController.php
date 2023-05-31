@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Category;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -30,8 +32,6 @@ class PostController extends Controller
 
 
     public function show(Post $post){
-
-
         return view('blog-post', ['post'=> $post]);
     }
 
@@ -39,8 +39,9 @@ class PostController extends Controller
     public function create(){
 
         $this->authorize('create', Post::class);
+        $cats = Category::all();
 
-        return view('admin.posts.create');
+        return view('admin.posts.create', ['cats' => $cats]);
     }
 
     public function store(){
@@ -50,11 +51,13 @@ class PostController extends Controller
         $inputs = request()->validate([
             'title'=> 'required|min:8|max:255',
             'post_image'=> 'file',
-            'body'=> 'required'
+            'body'=> 'required',
+            'category_id' => 'required',
         ]);
         if(request('post_image')){
             $inputs['post_image'] = request('post_image')->store('images');
         }
+        // dd($inputs);
         auth()->user()->posts()->create($inputs);
 
         session()->flash('post-created-message', 'Post with title was created '. $inputs['title']);

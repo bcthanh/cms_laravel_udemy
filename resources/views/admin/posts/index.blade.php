@@ -24,6 +24,7 @@
                             <th>Owner</th>
                             <th>Title</th>
                             <th>Image</th>
+                            <th>Category</th>
                             <th>Created At</th>
                             <th>Updated At</th>
                             <th>Delete</th>
@@ -36,6 +37,7 @@
                             <th>Owner</th>
                             <th>Title</th>
                             <th>Image</th>
+                            <th>Category</th>
                             <th>Created At</th>
                             <th>Updated At</th>
                             <th>Delete</th>
@@ -50,6 +52,7 @@
                                 <td>{{$post->user->name}}</td>
                                 <td><a href="{{route('post.edit', $post->id)}}">{{$post->title}}</a></td>
                                 <td><img width="100px" src="{{$post->post_image}}" alt=""></td>
+                                <td>{{$post->category ? $post->category->name : 'Uncategory'}}</td>
                                 <td>{{$post->created_at->diffForHumans()}}</td>
                                 <td>{{$post->updated_at->diffForHumans()}}</td>
                                 <td><form method="post" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data">

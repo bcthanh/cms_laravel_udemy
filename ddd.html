@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    for (let i = 0; i < petArr.length; i++) {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+          <td>${petArr[i].id}</td> 
+          <td>${petArr[i].name}</td>
+          <td>${petArr[i].age}</td>
+          <td>${petArr[i].type}</td><td>${petArr[i].weight}</td><td>${petArr[i].length}</td>
+          <td>${petArr[i].breed}</td>
+          <td><i class="bi bi-square-fill" style="color: ${petArr[i].color}"></i></td>
+          <td><i class="bi bi-${petArr[i].vaccinated ? "check" : "x"}-circle-fill"></td>
+          <td><i class="bi bi-${petArr[i].dewormed ? "check" : "x"}-circle-fill"></i></td>
+          <td><i class="bi bi-${petArr[i].sterlized ? "check" : "x"}-circle-fill"></i></td>
+          <td>${petArr[i].date}</td>
+          <td>
+            <button class="btn btn-danger" onclick="deletePet(${petArr[i].id})">Delete</button></td>`;
+      tableBodyEl.appendChild(row);
+    }
+  </script>
+</body>
+
+</html>

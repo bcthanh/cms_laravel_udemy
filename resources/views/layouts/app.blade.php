@@ -76,5 +76,8 @@
             @yield('content')
         </main>
     </div>
+
+    {{-- choox nay cho script --}}
+    @yield('script')
 </body>
 </html>

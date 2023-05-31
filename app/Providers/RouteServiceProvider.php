@@ -45,7 +45,11 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-
+        $this->mapPostRoutes();
+        $this->mapUserRoutes();
+        $this->mapRoleRoutes();
+        $this->mapPermissionRoutes();
+        $this->mapCatRoutes();
         //
     }
 
@@ -60,7 +64,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->namespace)
-            ->group(base_path('routes/web.php'));
+            ->group(base_path('routes/web/web.php'));
     }
 
     /**
@@ -75,6 +79,46 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path('routes/api.php'));
+            ->group(base_path('routes/api/api.php'));
+    }
+
+    protected function mapCatRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/categories.php'));
+    }
+
+    protected function mapPostRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/posts.php'));
+    }
+
+    protected function mapUserRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/users.php'));
+    }
+
+    protected function mapRoleRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware(['web', 'auth', 'role:admin'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/roles.php'));
+    }
+
+    protected function mapPermissionRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware(['web', 'auth', 'role:admin'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/permissions.php'));
     }
 }

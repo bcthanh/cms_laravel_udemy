@@ -14,6 +14,12 @@
                                        aria-describedby=""
                                        placeholder="Enter title">
                         </div>
+                        <div class="form-group"><label for="">Category</label>
+                            <select name="category_id" id="" class="form-control">
+                                @foreach($cats as $cat)
+                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                @endforeach
+                                </select></div>
                         <div class="form-group">
                                 <label for="file">File</label>
                                 <input type="file"
@@ -24,6 +30,7 @@
 
 
                         <div class="form-group">
+                            <label for="body">Content</label>
                          <textarea
                                  name="body"
                                  class="form-control"
